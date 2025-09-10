@@ -14,6 +14,7 @@ public class CartClass : MonoBehaviour
 
     public Image Image;
     public List<PopUpClass> PopUps = new List<PopUpClass>();
+    public TMP_TextJuicer NameCart;
     
     private List<TMP_TextJuicer> texts = new List<TMP_TextJuicer>();
     private List<Button> buttons = new List<Button>();
@@ -41,6 +42,7 @@ public class CartClass : MonoBehaviour
 
     public void Hide()
     {
+        HideAllPopap();
         gameObject.SetActive(false);
     }
 
@@ -56,16 +58,20 @@ public class CartClass : MonoBehaviour
 
     IEnumerator AnimButtons()
     {
-        foreach (var text in texts) 
-        {
-            //text.GetComponent<TMP_Text>().color = Color.clear;
-            //text.GetComponent<TextJuicerGradientModifier>().ModifyCharacter();
-        }
-        foreach (var text in texts) 
-        {
-            text.Play();
-            yield return new WaitForSeconds(0.1f);
-        }
+        // foreach (var text in texts) 
+        // {
+        //     text.GetComponent<TMP_Text>().color = Color.clear;
+        //     text.GetComponent<TMP_Text>().color = Color.clear;
+        //     text.GetComponent<TextJuicerGradientModifier>().ModifyCharacter();
+        // }
+        // foreach (var text in texts) 
+        // {
+        //     text.Restart();
+        //     text.Play();
+        //     yield return new WaitForSeconds(0.1f);
+        // }
+        NameCart.Restart();
+        NameCart.Play();
         while (true)
         {
             foreach (var button in buttons)

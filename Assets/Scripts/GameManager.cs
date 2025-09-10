@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
                 new Vector2(25f + i * 125f, MenuItems[i].offsetMin.y);
             MenuItems[i].offsetMax =
                 new Vector2(125f + i * 125f, MenuItems[i].offsetMax.y);
-            Debug.Log(MenuItems[i].offsetMin + " " + MenuItems[i].offsetMax);
+            //Debug.Log(MenuItems[i].offsetMin + " " + MenuItems[i].offsetMax);
             //_items[i].GetComponent<ButtonCartClass>().Cart.Hide();
             _items.Add(MenuItems[i]);
         }
