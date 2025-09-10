@@ -23,15 +23,31 @@ public class CartClass : MonoBehaviour
         texts = GetComponentsInChildren<TMP_TextJuicer>(true).ToList();
         buttons = GetComponentsInChildren<Button>(true).ToList();
 
-        // for (int i = 0; i < PopUps.Count; i++)
-        // {
-        //     buttons[i].onClick.AddListener(PopUps[i].Show);
-        // }
+        for (int i = 0; i < PopUps.Count; i++)
+        {
+            PopUps[i].Init(this);
+            buttons[i].onClick.AddListener(PopUps[i].Show);
+        }
         Show();
+    }
+
+    public void HideAllPopap()
+    {
+        for (int i = 0; i < PopUps.Count; i++)
+        {
+            PopUps[i].Hide();
+        }
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     public void Show()
     {
+        GameManager.instance.CurrentCart = this;
+        gameObject.SetActive(true);
         Image.color = Color.clear;
         Image.DOColor(Color.white, 0.5f);
         

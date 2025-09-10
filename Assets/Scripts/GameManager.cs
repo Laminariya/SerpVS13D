@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public RectTransform MenuParent;
     public float SpeedMenu = 1f;
 
+    [HideInInspector] public CartClass CurrentCart;
+
     private Vector2 _minVector2;
     private Vector2 _maxVector2;
     private int _activeItem = 1;
@@ -53,8 +55,10 @@ public class GameManager : MonoBehaviour
             MenuItems[i].offsetMax =
                 new Vector2(125f + i * 125f, MenuItems[i].offsetMax.y);
             Debug.Log(MenuItems[i].offsetMin + " " + MenuItems[i].offsetMax);
+            //_items[i].GetComponent<ButtonCartClass>().Cart.Hide();
             _items.Add(MenuItems[i]);
         }
+        _items[1].GetComponent<ButtonCartClass>().Show();
         
     }
 
@@ -74,6 +78,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MoveLeft()
     {
+        _items[1].GetComponent<Image>().color = Color.clear;
         float distance = 125f;
         _items[1].GetChild(0).localScale = Vector3.one;
         float startX = _items[0].offsetMin.x;
@@ -97,7 +102,8 @@ public class GameManager : MonoBehaviour
                 RectTransform image = _items[0];
                 _items.RemoveAt(0);
                 _items.Add(image);
-                _items[1].GetChild(0).localScale *= 1.2f;
+                _items[1].GetComponent<Image>().color = new Color(1f,1f,1f, 0.2f);
+                _items[1].GetComponent<ButtonCartClass>().Show();
                 FinishMoveMenu();
                 yield break;
             }
@@ -116,6 +122,7 @@ public class GameManager : MonoBehaviour
     
     IEnumerator MoveRight()
     {
+        _items[1].GetComponent<Image>().color = Color.clear;
         float distance = 125f;
         float startX = _items[0].offsetMin.x;
         _items[1].GetChild(0).localScale = Vector3.one;
@@ -141,7 +148,8 @@ public class GameManager : MonoBehaviour
                     _items[i].offsetMax = _maxVector2;
                 }
 
-                _items[1].GetChild(0).localScale *= 1.2f;
+                _items[1].GetComponent<Image>().color = new Color(1f,1f,1f, 0.2f);
+                _items[1].GetComponent<ButtonCartClass>().Show();
                 FinishMoveMenu();
                 yield break;
             }

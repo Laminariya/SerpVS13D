@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ButtonCartClass : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public CartClass Cart;
+
+    public void Show()
     {
-        
+        if(GameManager.instance.CurrentCart!=null)
+            GameManager.instance.CurrentCart.Hide();
+        Cart.Show();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
