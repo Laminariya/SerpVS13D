@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
 
     public float Duration;
     public float Delay;
-    
+
     public Button b_Left;
     public Button b_Right;
     public List<RectTransform> MenuItems = new List<RectTransform>();
     public RectTransform MenuParent;
     public float SpeedMenu = 1f;
+
+    public Button b_Close;
 
     [HideInInspector] public CartClass CurrentCart;
 
@@ -25,10 +27,13 @@ public class GameManager : MonoBehaviour
     private Vector2 _maxVector2;
     private int _activeItem = 1;
     private List<RectTransform> _items = new List<RectTransform>();
+    
+    private int _countClose = 0;
+    private float _timerClose;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
     }
 
@@ -38,12 +43,27 @@ public class GameManager : MonoBehaviour
         _maxVector2 = new Vector2(0, MenuItems[0].offsetMax.y);
         b_Left.onClick.AddListener(OnLeftClick);
         b_Right.onClick.AddListener(OnRightClick);
+        b_Close.onClick.AddListener(OnClose);
         InitMenu();
     }
-    
+
     void Update()
     {
-        
+        if (_countClose == 3)
+        {
+            Application.Quit();
+        }
+
+        if (Time.time - _timerClose >= 1f)
+        {
+            _countClose = 0;
+        }
+    }
+
+    private void OnClose()
+    {
+        _countClose++;
+        _timerClose = Time.time;
     }
 
     private void InitMenu()
